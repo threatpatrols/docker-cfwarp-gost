@@ -42,6 +42,7 @@ build_tagged:
 
 container_scanning:
   stage: scanning
+  needs: ["build_tagged"]
   tags:
     - "${GITLAB_RUNNER_TAG}"
   variables:
