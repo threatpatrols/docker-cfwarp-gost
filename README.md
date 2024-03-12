@@ -1,16 +1,19 @@
-# Cloudflare Warp with Gost SOCKS on Docker
+# Go Simple Tunnel (GOST) on Cloudflared on Docker
 
 ## Usage
 
 ### Start the container
 
-To run the WARP client in Docker, use the `docker-compose.yml` and run `docker-compose up -d`.
+To run a Go Simple Tunnel ([GOST](https://gost.run/en/)) on Cloudflare in Docker, use 
+a `docker-compose.yml` similar to the one provided here.
+
+Bring it up with a standard `docker-compose up -d` command.
 
 ```yaml
 version: '3'
 
 x-socks-base: &socks-base
-  image: cfwarp-gostsocks-docker:20240305z032831-dev
+  image: gost-cloudflared:latest
   restart: always
   cap_add:
     - NET_ADMIN
@@ -33,11 +36,17 @@ services:
       - '127.0.0.1:1081:1080'
     environment:
       - GOST_FORWARD=socks5://<socks-server-ip-address>:<socks-server-port>
-
-
 ```
 
-See if it works:
+**Notes** 
+- This sample `docker-compose.yml` should be modified to suit your situation.
+- The `socks-with-upstream` section is optional, you can use a GOST SOCKS5 tunnel on Cloudflare without an upstream proxy.
+- If you plan to use the `socks-with-upstream` definition, pay attention to the `GOST_FORWARD` environment variable
+- Credentials can be added for the upstream-proxy using standard `socks5://<username>:<password>@<socks-server-ip-address>:<socks-server-port>` notation.
+- This `docker-compose.yml` example uses YAML Anchors to make the service definitions shorter without repeating etc, learn more here if unfamiliar https://docs.docker.com/compose/compose-file/10-fragments/
+
+
+Test the Docker compose once it is up:
 
 ```bash
 curl --socks5 127.0.0.1:1080 "https://ipinfo.io/json"
@@ -57,4 +66,4 @@ Data persistence: Use the host volume `./data` to persist the data of the WARP c
 
 ## Project Fork Credit
 
-This Docker is based on the work from `caomingjun/warp` that maintains an awesome [blog post](https://blog.caomingjun.com/run-cloudflare-warp-in-docker/en).
+This Docker is heavily based on the work from **caomingjun** that has an awesome blog [post](https://blog.caomingjun.com/run-cloudflare-warp-in-docker/en) and [github](https://github.com/cmj2002/warp-docker) repo.
