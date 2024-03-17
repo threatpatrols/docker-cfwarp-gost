@@ -4,13 +4,14 @@
 
 ### Start the container
 
-To run the WARP client in Docker, use the `docker-compose.yml` and run `docker-compose up -d`.
+To run the WARP client in Docker, use a `docker-compose.yml` similar to
+the one provided here, and run `docker-compose up -d`.
 
 ```yaml
 version: '3'
 
 x-socks-base: &socks-base
-  image: cfwarp-gostsocks-docker:20240305z032831-dev
+  image: cfwarp-gostsocks-docker:latest
   restart: always
   cap_add:
     - NET_ADMIN
@@ -33,11 +34,17 @@ services:
       - '127.0.0.1:1081:1080'
     environment:
       - GOST_FORWARD=socks5://<socks-server-ip-address>:<socks-server-port>
-
-
 ```
 
-See if it works:
+**Notes** 
+- This sample `docker-compose.yml` should be modified to suit your situation.
+- The `socks-with-upstream` section is optional, you can use Cloudflare SOCKS5 through GOST without an upstream proxy.
+- If you plan to use the `socks-with-upstream` definition, pay attention to the `GOST_FORWARD` environment variable
+- Credentials can be added using standard `socks5://<username>:<password>@<socks-server-ip-address>:<socks-server-port>` notation.
+- This `docker-compose.yml` uses YAML Anchors to make the service definitions shorter without repeating etc, learn more here if unfamiliar https://docs.docker.com/compose/compose-file/10-fragments/
+
+
+Test the Docker compose once it is up:
 
 ```bash
 curl --socks5 127.0.0.1:1080 "https://ipinfo.io/json"
