@@ -38,7 +38,7 @@ services:
       - GOST_FORWARD=socks5://<socks-server-ip-address>:<socks-server-port>
 ```
 
-**Notes** 
+### Notes
 - This sample `docker-compose.yml` should be modified to suit your situation.
 - The `socks-with-upstream` section is optional, you can use a GOST SOCKS5 tunnel on Cloudflare without an upstream proxy.
 - If you plan to use the `socks-with-upstream` definition, pay attention to the `GOST_FORWARD` environment variable
@@ -63,6 +63,9 @@ You can configure the container through the following environment variables:
   
 Data persistence: Use the host volume `./data` to persist the data of the WARP client. You can change the location of this directory or use other types of volumes. If you modify the `WARP_LICENSE_KEY`, please delete the `./data` directory so that the client can detect and register again.
 
+## Repos
+* Github: https://github.com/threatpatrols/gost-cloudflared
+* DockerHub: https://hub.docker.com/repository/docker/threatpatrols/gost-cloudflared
 
 ## Project Fork Credit
 
