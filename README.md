@@ -13,7 +13,7 @@ Bring it up with a standard `docker-compose up -d` command.
 version: '3'
 
 x-socks-base: &socks-base
-  image: gost-cloudflared:latest
+  image: threatpatrols/gost-cloudflared:latest
   restart: always
   cap_add:
     - NET_ADMIN
