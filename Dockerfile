@@ -1,9 +1,13 @@
-FROM debian:stable-slim
 
+# https://hub.docker.com/_/debian/tags
+FROM debian:stable
+
+# Hello
+LABEL maintainer="Nicholas de Jong <ndejong@threatpatrols.com>"
+LABEL source="https://github.com/threatpatrols/docker-cfwarp-gost"
 
 # https://github.com/ginuerzh/gost/releases
 ARG GOST_PACKAGE_URL="https://github.com/ginuerzh/gost/releases/download/v2.11.5/gost-linux-amd64-2.11.5.gz"
-
 
 # install prerequisites and cloudflare-warp
 RUN \
@@ -17,6 +21,7 @@ RUN \
     apt-get install -y cloudflare-warp && \
     mkdir -p /root/.local/share/warp && \
     echo -n 'yes' > /root/.local/share/warp/accepted-tos.txt && \
+    echo -n 'yes' > /root/.local/share/warp/accepted-teams-tos.txt && \
     warp-cli --version && \
     \
     apt-get clean && \
