@@ -67,7 +67,7 @@ Data persistence: Use the host volume `./data` to persist the data of the WARP c
 
 ## Repos
 * Github: https://github.com/threatpatrols/docker-cfwarp-gost
-* DockerHub: https://hub.docker.com/repository/docker/threatpatrols/cfwarp-gost
+* DockerHub: https://hub.docker.com/r/threatpatrols/cfwarp-gost
 
 NB: early releases of this project mistakenly referred to "Cloudflare WARP" as "Cloudflared" - the project and repos have been renamed accordingly since.
 
