@@ -1,6 +1,6 @@
 
 # https://hub.docker.com/_/debian/tags
-FROM debian:stable
+FROM debian:stable-slim
 
 # Hello
 LABEL maintainer="Nicholas de Jong <ndejong@threatpatrols.com>"
@@ -25,7 +25,8 @@ RUN \
     warp-cli --version && \
     \
     apt-get clean && \
-    apt-get autoremove -y
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
 
 
 # download and install gost
