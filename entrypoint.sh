@@ -38,6 +38,8 @@ fi
 echo -n "Connecting Warp client: "
 warp-cli connect
 
+sleep 3
+
 if [[ -n ${GOST_FORWARD} ]]; then
   gost -L ":1080" -F "${GOST_FORWARD}"
 else

@@ -53,7 +53,7 @@ curl --socks5 127.0.0.1:1080 "https://ipinfo.io/json"
 curl --socks5 127.0.0.1:1081 "https://ipinfo.io/json"
 ```
 
-### Configuration
+## Configuration
 
 You can configure the container through the following environment variables:
 
