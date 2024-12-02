@@ -15,8 +15,7 @@ version: '3'
 x-socks-base: &socks-base
   image: threatpatrols/cfwarp-gost:latest
   restart: always
-  cap_add:
-    - NET_ADMIN
+  privileged: true  # required for Cloudflare WARP
   sysctls:
     - net.ipv6.conf.all.disable_ipv6=0
     - net.ipv4.conf.all.src_valid_mark=1
@@ -39,6 +38,7 @@ services:
 ```
 
 ### Notes
+- Recent cloudflare warp versions (2024.11.309.0) apper to require use of the `--privileged` flag to open the `tun` interface, would prefer an explicit approach.
 - This sample `docker-compose.yml` should be modified to suit your situation.
 - The `socks-with-upstream` section is optional, you can use a GOST SOCKS5 tunnel through Cloudflare WARP without an upstream proxy.
 - If you plan to use the `socks-with-upstream` definition, pay attention to the `GOST_FORWARD` environment variable
