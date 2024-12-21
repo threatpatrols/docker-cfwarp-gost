@@ -40,7 +40,7 @@ if [ "$(warp-cli registration show 2>&1 | grep -c -i 'error')" -gt 0 ]; then
   # if license key is provided, set it
   if [ -n "$WARP_LICENSE_KEY" ]; then
       echo " >> [warp-register] adding Warp license to registration"
-      warp-cli set-license "$WARP_LICENSE_KEY"
+      warp-cli registration license "$WARP_LICENSE_KEY"
   fi
 
   sleep "${WARP_START_DELAY}"
