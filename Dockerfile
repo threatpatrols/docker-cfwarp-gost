@@ -45,9 +45,10 @@ RUN \
 # https://hub.docker.com/_/debian/tags
 FROM debian:stable-slim
 
-# Hello
-LABEL maintainer="Nicholas de Jong <ndejong@threatpatrols.com>"
-LABEL source="https://github.com/threatpatrols/docker-cfwarp-gost"
+# OCI Labels
+LABEL org.opencontainers.image.title="Docker GOST on CFWarp"
+LABEL org.opencontainers.image.authors="Nicholas de Jong <ndejong@threatpatrols.com>"
+LABEL org.opencontainers.image.source="https://github.com/threatpatrols/docker-cfwarp-gost"
 
 # copy-install gost binary
 COPY --from=gost-download /tmp/gost/gost /usr/local/bin/gost
