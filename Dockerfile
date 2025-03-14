@@ -78,3 +78,4 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=5 \
   CMD "/healthchecks.sh"
 
 ENTRYPOINT ["/entrypoint.sh"]
+
